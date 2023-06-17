@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Library Home Page</title>
+  </head>
+  <body>
+    <h1>Library Home Page</h1>
+    <form action="/add" method="post">
+      <input type="text" name="book" placeholder="Book Name" required>
+      <button type="submit">Add Book</button>
+    </form>
+    <form action="/search" method="post">
+      <input type="text" name="search" placeholder="Search Book">
+      <button type="submit">Search</button>
+    </form>
+    <% if (books.length > 0) { %>
+      <ul>
+        <% books.forEach((book, index) => { %>
+          <li>
+            <%= book %>
+            <form action="/update" method="post" style="display:inline;">
+              <input type="hidden" name="index" value="<%= index %>">
+              <input type="text" name="book" placeholder="New Book Name" required>
+              <button type="submit">Update</button>
+            </form>
+            <form action="/delete" method="post" style="display:inline;">
+              <input type="hidden" name="index" value="<%= index %>">
+              <button type="submit">Delete</button>
+            </form>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No books available</p>
+    <% } %>
+  </body>
+</html>
